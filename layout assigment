@@ -1,0 +1,344 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+//I used AI tools to help me with my homework and to learn about the properties of each widget.
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: HomePage(),
+    );
+  }
+}
+
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(18),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Title
+                const Text(
+                  "Center",
+                  style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+                ),
+
+                const SizedBox(height: 18),
+
+                // Profile Card
+                const ProfileCard(),
+
+                const SizedBox(height: 25),
+
+                // Quick Actions
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    QuickAction(
+                      icon: Icons.account_balance_wallet_outlined,
+                      title: "Wallet",
+                    ),
+                    QuickAction(
+                      icon: Icons.local_shipping_outlined,
+                      title: "Delivery",
+                    ),
+                    QuickAction(
+                      icon: Icons.message_outlined,
+                      title: "Message",
+                      showBadge: true,
+                    ),
+                    QuickAction(
+                      icon: Icons.monetization_on_outlined,
+                      title: "Service",
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 25),
+
+                // Settings Cards
+                SettingsItem(
+                  icon: Icons.location_on,
+                  title: "Address",
+                  subtitle: "Ensure your harvesting address",
+                  iconColor: Colors.deepPurple,
+                  backgroundColor: Colors.purple.shade100,
+                ),
+
+                SettingsItem(
+                  icon: Icons.lock,
+                  title: "Privacy",
+                  subtitle: "System permission change",
+                  iconColor: Colors.pink,
+                  backgroundColor: Colors.pink.shade100,
+                ),
+
+                SettingsItem(
+                  icon: Icons.layers,
+                  title: "General",
+                  subtitle: "Basic functional settings",
+                  iconColor: Colors.orange,
+                  backgroundColor: Colors.orange.shade100,
+                ),
+
+                SettingsItem(
+                  icon: Icons.notifications,
+                  title: "Notification",
+                  subtitle: "Take over the news in time",
+                  iconColor: Colors.teal,
+                  backgroundColor: Colors.teal.shade100,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+class ProfileCard extends StatelessWidget {
+  const ProfileCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: Colors.blue,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.blue.withValues(alpha: 0.3),
+            blurRadius: 12,
+            offset: const Offset(0, 5),
+          ),
+        ],
+      ),
+
+      child: Column(
+        children: [
+          // User Information
+          Row(
+            children: [
+              const CircleAvatar(
+                radius: 26,
+                backgroundColor: Colors.white,
+                child: Icon(Icons.person, size: 32, color: Colors.blue),
+              ),
+
+              const SizedBox(width: 12),
+
+              const Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Mausam Rayamajhi",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      "A trendsetter",
+                      style: TextStyle(color: Colors.white70, fontSize: 12),
+                    ),
+                  ],
+                ),
+              ),
+
+              const Icon(Icons.edit, color: Colors.white, size: 20),
+            ],
+          ),
+
+          const SizedBox(height: 20),
+
+          // Statistics
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              StatisticItem(number: "846", title: "Collect"),
+              StatisticItem(number: "51", title: "Attention"),
+              StatisticItem(number: "267", title: "Track"),
+              StatisticItem(number: "39", title: "Coupons"),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
+class StatisticItem extends StatelessWidget {
+  final String number;
+  final String title;
+
+  const StatisticItem({super.key, required this.number, required this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          number,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 19,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+
+        const SizedBox(height: 4),
+
+        Text(
+          title,
+          style: const TextStyle(color: Colors.white70, fontSize: 11),
+        ),
+      ],
+    );
+  }
+}
+
+
+class QuickAction extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final bool showBadge;
+
+  const QuickAction({
+    super.key,
+    required this.icon,
+    required this.title,
+    this.showBadge = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Icon(icon, size: 27, color: Colors.black87),
+
+            if (showBadge)
+              Positioned(
+                right: -8,
+                top: -7,
+                child: CircleAvatar(
+                  radius: 8,
+                  backgroundColor: Colors.blue,
+                  child: const Text(
+                    "2",
+                    style: TextStyle(color: Colors.white, fontSize: 9),
+                  ),
+                ),
+              ),
+          ],
+        ),
+
+        const SizedBox(height: 9),
+
+        Text(title, style: const TextStyle(fontSize: 12)),
+      ],
+    );
+  }
+}
+
+
+class SettingsItem extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String subtitle;
+  final Color iconColor;
+  final Color backgroundColor;
+
+  const SettingsItem({
+    super.key,
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+    required this.iconColor,
+    required this.backgroundColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.all(14),
+
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.blue.withValues(alpha: 0.12),
+            blurRadius: 15,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+
+      child: Row(
+        children: [
+          // Colored Icon
+          CircleAvatar(
+            radius: 18,
+            backgroundColor: backgroundColor,
+            child: Icon(icon, color: iconColor, size: 20),
+          ),
+
+          const SizedBox(width: 12),
+
+          // Text
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
+                ),
+
+                const SizedBox(height: 3),
+
+                Text(
+                  subtitle,
+                  style: TextStyle(color: Colors.grey.shade500, fontSize: 11),
+                ),
+              ],
+            ),
+          ),
+
+          // Arrow
+          Icon(Icons.chevron_right, color: Colors.grey.shade400),
+        ],
+      ),
+    );
+  }
+}
+
