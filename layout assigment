@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-// استخدمت ادوات الذكاء الاصطناعي في معرفة الويدجتس اللي بدي استخدمها وتنسيقها وترتيبها
+//I used AI tools to help me with my homework and to learn about the properties of each widget.
 void main() {
   runApp(const MyApp());
 }
-//I used AI tools to help me with my homework and to learn about the properties of each widget.
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
